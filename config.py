@@ -12,4 +12,4 @@ class Config(object):
     UPLOADED_AVATARS_DEST = 'app\\static\\avatars'
     UPLOADED_PHOTOS_DEST = 'app\\static\\uploads'
     UPLOADS_AUTOSERVE = True
-    ADMIN_EMAIL = "1139369370@qq.com"
+    ADMIN_EMAIL = "admin@email.com"
