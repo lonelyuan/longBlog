@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% import "_macros.html" as macros %}
+{% block title %}Dialogue{% endblock %}
+
+{% block app_content %}
+<h2>Dialogue with {{ reply_user.username }}</h2>
+
+{% include 'comments/_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.reply', fragment='#comments', id=comment.id) }}
+</div>
+{% endif %}
+<div class="comment-form">
+    {{ render_form(form) }}
+</div>
+{% endblock %}

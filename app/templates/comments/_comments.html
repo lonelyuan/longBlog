@@ -1,0 +1,43 @@
+<ul class="comments">
+    {% for comment in comments %}
+    <li class="comment">
+        <div class="comment-thumbnail">
+            <a href="{{ url_for('main.user', username=comment.author.username) }}">
+                {% if comment.author.avatar != None %}
+                    <img class="img-rounded profile-thumbnail" src="/static/avatars/{{comment.author.avatar}}">
+                {% else %}
+                    <img class="img-rounded profile-thumbnail" src="{{comment.author.get_avatar(70)}}">
+                {% endif %}
+
+            </a>
+        </div>
+        <div class="comment-content">
+            <div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>{#TODO: 悬浮标签： #}
+
+            <div class="comment-author">
+                <a href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                {% if comment.type == "comment" %}
+                <span class="badge badge-pill badge-primary">
+                    @ <a href="{{ url_for('main.user', username=comment.reply_name) }}" style="color: #fff;">{{ comment.reply_name }}</a>
+                </span>
+                {%  endif %}
+            </div>
+            <div class="comment-body">
+                {{ comment.body }}
+            </div>
+
+            <div class="post-footer">
+                <a href="{{ url_for('comments.reply', id=comment.id) }}?replyid={{comment.id}}&postid={{comment.post_id}}">
+                    <span class="badge badge-pill badge-primary"> Reply </span>
+                </a>
+{#            {{ current_user.id }}/{{ comment.post_id }}/{{ comment.image_id }}/{{ comment.author_id }}#}
+                {% if current_user.id == comment.post_id or current_user.id == comment.image_id or current_user.id == comment.author_id %}
+                <a href="{{ url_for('comments.delete', id=comment.id) }}?postid={{comment.post_id}}">
+                    <span class="badge badge-pill badge-danger"> Delete </span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

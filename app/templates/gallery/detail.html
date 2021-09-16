@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% import "_macros.html" as macros %}
+{% block title %}Flasky - Post{% endblock %}
+
+{% block app_content %}
+<h2>Detail</h2>
+{% import 'gallery/_image.html' as show_image %}
+{{ show_image.image_card(image,path) }}
+<div class="comment-form">
+    {{ render_form(form) }}
+</div>
+{% include 'comments/_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.detail', fragment='#comments', id=image.id) }}
+</div>
+{% endif %}
+
+{% endblock %}

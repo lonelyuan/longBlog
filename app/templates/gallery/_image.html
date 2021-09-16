@@ -1,0 +1,9 @@
+{% macro image_card(image,path,style="") %}
+
+<div class="card" style="{{ style }}" onclick="window.location='{{ url_for("gallery.detail",id=image.id) }}'">
+    <img class="card-img-top" src="{{ path }}/{{ image.filename }}" rel="nofollow" alt="Card image cap">
+    <div class="card-body">
+        <p class="card-text">{{ image.describe }}</p>
+    </div>
+</div>
+{% endmacro %}

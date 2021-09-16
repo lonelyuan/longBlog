@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block app_content %}
+    <h3>Edit Profile</h3>
+    <div class="row">
+        <div class="col-md-4">
+            {{ render_form(form) }}
+            <a class="badge badge-pill badge-danger" href="{{ url_for("main.del_user") }}">注销用户</a>
+        </div>
+    </div>
+{% endblock %}

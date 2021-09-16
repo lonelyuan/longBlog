@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% import "_macros.html" as macros %}
+{% block title %}Flasky - Post{% endblock %}
+
+{% block app_content %}
+{% include 'posts/_posts.html' %}
+<div class="comment-form">
+    {{ render_form(form) }}
+</div>
+{% include 'comments/_comments.html' %}
+{% if pagination %}
+<div class="paginationpa">
+    {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=posts[0].id) }}
+</div>
+{% endif %}
+{% endblock %}

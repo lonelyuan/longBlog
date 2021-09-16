@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% import "_macros.html" as macros %}
+
+{% block cover %}
+  <div class="page-header header-filter" data-parallax="true" style="background-image: url('/static/assets/img/bg2.jpg')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            {% if title %}
+            <h1>{{title}}</h1>
+            {% else %}
+            <h1>Hello world</h1>
+            {% endif %}
+            <h3 class="title text-center">一个博客网站</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block app_content %}
+    <h3>Hi, {{ current_user.username }}!</h3>
+    {% if form %}
+    {{ render_form(form) }}
+    <!--quickform你就是个几把-->
+    <br>
+    {% endif %}
+
+    <div class="post-tabs">
+        {% include 'posts/_posts.html' %}
+    </div>
+    {% if pagination %}
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.index') }}
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

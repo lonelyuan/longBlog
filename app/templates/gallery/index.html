@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% import "_macros.html" as macros %}
+{% import "gallery/_image.html" as show_image %}
+{% block title %}Flasky - Gallery{% endblock %}
+
+{% block app_content %}
+    <div class="profile-page sidebar-collapse tab-content tab-space">
+    <p>图库当前共有 {{ image_sum }} 张图片</p>
+        <div class="tab-pane active text-center gallery" id="studio" style="width: 100%">
+            <div class="row" >
+                <div class="col-md-3 ml-auto" style="max-width: 50em;">
+                    {% for image in images %}
+                    {% if image.id % 2 == 1 %}
+                        {{ show_image.image_card(image,path,style="width: 20rem;") }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-md-3 mr-auto" style="max-width: 50em;">
+                    {% for image in images %}
+                    {% if image.id % 2 == 0 %}
+                        {{ show_image.image_card(image,path,style="width: 20rem;") }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+     <a class="btn btn-primary" href="{{ url_for("gallery.loadmore",offset=offset) }}">没看够？</a>
+     <a class="btn btn-success" href="{{ url_for("gallery.upload") }}">我要上传</a>
+    {# TODO: 下拉自动加载 #}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
+
+{% block title %}Flasky - Edit Post{% endblock %}
+
+{% block app_content %}
+<h2>
+    <h1>Edit Post</h1>
+</h2>
+<div>
+    {{ render_form(form) }}
+    <br>
+    <a type="button" class="btn btn-danger" href="{{url_for('posts.delete', id=id)}}">Delete</a>
+</div>
+{% endblock %}
